@@ -1,0 +1,8 @@
+<div class="container" [class.selected]="selectedMenu === 'home'" (click)="selectedMenuChange.emit('home')">
+    <img src="/assets/home.png" style="width: 40px; height: 40px;"/>
+    <label>Home</label>
+</div>
+<div class="container" [class.selected]="selectedMenu === 'add'" (click)="selectedMenuChange.emit('add')">
+    <img src="/assets/add.png" style="width: 40px; height: 40px;"/>
+    <label>Add</label>
+</div>

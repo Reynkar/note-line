@@ -1,0 +1,22 @@
+:host {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 10%;
+    height: 100vh;
+    position: absolute;
+    background-color: #15e89b;
+    color: black;
+    text-align: center;
+    z-index: 1;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+}

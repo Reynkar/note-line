@@ -1,0 +1,8 @@
+<label>
+     <input class ="input" #note [type]="'text'" placeholder="note..." />
+     <div class="line-box">        
+          <div class="line"></div>      
+     </div>
+</label>
+
+<button (click)="sendNote(note.value)">Upload</button>

@@ -1,0 +1,9 @@
+<div class="masonry-wrapper">
+<div class="masonry" *ngIf="(localstrg.notes$ | async)?.length > 0; else empty">
+    <div class="item"  *ngFor="let note of this.localstrg.notes$ | async" [ngStyle]="{'background-color': note.color}">
+        <label class="masonry-content">{{ note.content }}</label>
+    </div>
+</div>
+</div>
+
+<ng-template #empty>The list is empty...</ng-template>

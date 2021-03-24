@@ -1,0 +1,31 @@
+.masonry { /* Masonry container */
+    display: flex;
+    flex-flow: row wrap;
+    margin: 1.5em auto;
+    max-width: 80%;
+    column-gap: 1.5em;
+    row-gap: 1em;
+}
+  
+.item { /* Masonry bricks or child elements */
+  background-color: rgb(15, 166, 226);
+  flex: auto;
+  min-width: 150px;
+  margin: 0 8px 8px 0; /* Some gutter */
+  padding: 30px;
+  border-radius: 50px;
+  color: black;
+}
+
+.item:nth-child(4n+1) {
+    width: 250px;
+  }
+  .item:nth-child(4n+1):nth-child(4n+2) {
+    width: 325px;
+  }
+  .item:nth-child(4n+1):nth-child(4n+3) {
+    width: 180px;
+  }
+  .item:nth-child(4n+1):nth-child(4n+4) {
+    width: 380px;
+  }
