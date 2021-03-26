@@ -19,7 +19,10 @@ export class AddComponent implements OnInit {
     var b = Math.floor(Math.random() * 51) + 204;
     var color = "rgb("+r+", "+g+", "+b+")";
     console.log("rgb("+r+", "+g+", "+b+")");
-    this.localstrg.addNote(content, color);
+
+    let date = new Date();
+
+    this.localstrg.addNote(content, color, date);
   }
 
 }

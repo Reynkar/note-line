@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 interface Note {
   content: string;
   color: string;
+  date: Date;
 }
 
 @Injectable({
@@ -33,7 +34,7 @@ export class LocalstorageService {
   }
 
   public createDB(db: IDBDatabase): void {
-    db.createObjectStore("notes", { keyPath: "content" });
+    db.createObjectStore("notes", { keyPath: "date" });
   }
 
   public updatingNotes(): void {
@@ -59,14 +60,14 @@ export class LocalstorageService {
               })))));
   }
 
-  public addNote(content: string, color: string): void{
+  public addNote(content: string, color: string, date: Date): void{
 
     this.db$.pipe(
       switchMap(
         (db) =>
           new Observable(subscriber => {
             let transaction = db.transaction("notes", "readwrite");
-            transaction.objectStore("notes").add({ content: content, color: color });
+            transaction.objectStore("notes").add({ content: content, color: color, date: date });
 
             transaction.oncomplete = () => {
               transaction = null;

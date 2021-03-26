@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalstorageService } from '../services/localstorage.service';
+import { map } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
+
+interface Note {
+  content: string;
+  color: string;
+  date: Date;
+}
 
 @Component({
   selector: 'app-home',
@@ -10,23 +18,14 @@ export class HomeComponent implements OnInit {
 
   constructor(public localstrg: LocalstorageService) { }
 
+  public _notes$: Observable<Note[]>;
+
   ngOnInit(): void {
+
+    this._notes$ = this.localstrg.notes$
+    .pipe(
+      map(n => n.sort(function(a,b){return b.date.getTime()-a.date.getTime();}))
+    ); 
     
   }
-  /*
-  public notes: { title: string, date: string }[] = [
-    {"title": "Do the math homework fgsfgfdgdfgdfgdfgdfgdfgdfdf", "date": "2021 03 12"},
-    {"title": "Do the cleaning", "date": "2021 03 12"},
-    {"title": "Drive the kids to school", "date": "2021 03 12"},
-    {"title": "Prepare for the exam", "date": "2021 03 12"},
-    {"title": "Get up early", "date": "2021 03 12"},
-    {"title": "Get up early", "date": "2021 03 12"},
-    {"title": "Get up early", "date": "2021 03 12"},
-    {"title": "Get up early", "date": "2021 03 12"},
-    {"title": "Get up early", "date": "2021 03 12"},
-    {"title": "Get up early", "date": "2021 03 12"},
-  ];
-  */
-  
-
 }
