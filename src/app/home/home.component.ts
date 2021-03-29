@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalstorageService } from '../services/localstorage.service';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 
 interface Note {

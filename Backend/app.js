@@ -1,5 +1,8 @@
-const express = require("express");
+const app = require("express")();
 const mysql = require("mysql");
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const port = process.env.PORT || 3000;
 
 // Create connection
 const db = mysql.createConnection({
@@ -16,7 +19,13 @@ db.connect((err) => {
     console.log("Connected to the database");
 });
 
-const app = express();
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+  });
+  
+  io.on('connection', (socket) => {
+    console.log('a user connected');
+  });
 
 app.get("/addpost1", (res,req) => {
     let post = {id:'1', note:'this is the note', color:'rgb(200,200,200)'};
@@ -31,11 +40,11 @@ app.get("/getposts", (res,req) => {
     let sql = "SELECT * FROM test";
     let query = db.query(sql, (err, results) => {
         if(err) throw err;
-        console.log(results[0].ID);
+        console.log(results); // results[0].ID example for a single row+column
 
     });
 });
-
+/*
 app.get('/getposts/:id', (res,req) => {
     let sql = `SELECT * FROM test WHERE id = ${req.param.id}`;
     let query = db.query(sql, (err, results) => {
@@ -44,8 +53,15 @@ app.get('/getposts/:id', (res,req) => {
 
     });
 });
+*/
 
-app.listen("3000", () => {
-    console.log("Server started on port 3000");
-});
+io.on('connection', (socket) => {
+    socket.on('chat message', msg => {
+      io.emit('chat message', msg);
+    });
+  });
+
+  http.listen(port, () => {
+    console.log(`Socket.IO server running at http://localhost:${port}/`);
+  });
 
