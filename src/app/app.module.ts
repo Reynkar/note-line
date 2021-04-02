@@ -8,13 +8,15 @@ import { AddComponent } from './add/add.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MonthString } from './month-str.pipe'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    AddComponent
+    AddComponent,
+    MonthString
   ],
   imports: [
     BrowserModule,

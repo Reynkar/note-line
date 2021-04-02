@@ -1,11 +1,15 @@
-<div class="masonry-wrapper">
-<div class="masonry" *ngIf="(localstrg.notes$ | async)?.length > 0; else empty">
-    <div class="item"  *ngFor="let note of this._notes$ | async" [ngStyle]="{'background-color': note.color}">
-        <label class="masonry-content">{{ note.content }}</label>
-        <br/>
-        <label style="color: grey; font-size: 0.75em;">{{ note.date | date:'MMM d, y, h:mm:ss a' }}</label>
+<div class="masonry-wrapper" *ngIf="(localstrg.notes$ | async)?.length > 0; else empty">
+    <div *ngFor="let item of this._notes$ | async | keyvalue">
+        <h1 (click)="toggle(item.key)" style="color: white"><b>{{ item.key | monthstr }}</b></h1>
+        <hr style="width: 80%;">
+        <div class="masonry"  id="{{ item.key }}" >     
+        <div class="item"*ngFor="let note of item.value; index as i" [ngStyle]="{'background-color': note.color}">
+            <label class="masonry-content">{{ note.content }}</label>
+            <br/>
+            <label style="color: grey; font-size: 0.75em;">{{ note.date | date:'MMM d, y, h:mm:ss a' }}</label>
+        </div>     
     </div>
-</div>
+    </div>
 </div>
 
 <ng-template #empty>The list is empty...</ng-template>

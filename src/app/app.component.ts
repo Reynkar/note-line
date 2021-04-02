@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Nav } from "./nav/nav.component";
 import { LocalstorageService } from './services/localstorage.service';
+import { ConnectionService } from 'ng-connection-service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,22 @@ export class AppComponent implements OnInit {
 
   public menu: Nav = "home";
 
-  constructor(private localstrg: LocalstorageService) {}
+  status = 'ONLINE';
+  isConnected = true;
+
+  constructor(private localstrg: LocalstorageService, private connectionService: ConnectionService) {
+    this.connectionService.monitor().subscribe(isConnected => {
+      this.isConnected = isConnected;
+      if (this.isConnected) {
+        this.status = "ONLINE";
+        console.log("ONLINE!");
+      }
+      else {
+        this.status = "OFFLINE";
+        console.log("OFFLINE!");
+      }
+    })
+  }
 
   public ngOnInit(): void{
       this.localstrg.init();
