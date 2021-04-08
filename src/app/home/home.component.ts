@@ -20,11 +20,37 @@ export class HomeComponent implements OnInit {
 
   public _notes$: Observable<Note[]>;
 
-  public toggle(element): void {
-    if (document.getElementById(element).style.display === "none")
+  public toggleMonth(element): void {
+    if (document.getElementById(element).style.display === "none"){
       document.getElementById(element).style.display = "flex";
+      document.getElementById("up " + element).style.display = "none";
+      document.getElementById("down " + element).style.display = "inline";
+    }
+      
     else
+    {
       document.getElementById(element).style.display = "none";
+      document.getElementById("up " + element).style.display = "inline";
+      document.getElementById("down " + element).style.display = "none";
+    }
+      
+  }
+
+  public toggleItem(element): void {
+    if (document.getElementById("container " + element).classList.contains("itemHidden")) {
+      document.getElementById(element).classList.remove("contentHidden");
+      document.getElementById(element).classList.add("contentShow");
+      document.getElementById("container " + element).classList.remove("itemHidden");
+      document.getElementById("container " + element).classList.add("itemShow");
+    }
+      
+    else {
+     document.getElementById(element).classList.add("contentHidden");
+     document.getElementById(element).classList.remove("contentShow");
+     document.getElementById("container " + element).classList.add("itemHidden");
+     document.getElementById("container " + element).classList.remove("itemShow");
+    }
+      
   }
 
   ngOnInit(): void {

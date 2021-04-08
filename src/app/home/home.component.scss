@@ -8,7 +8,6 @@
 }
   
 .item { /* Masonry bricks or child elements */
-  background-color: rgb(15, 166, 226);
   flex: auto;
   min-width: 150px;
   margin: 0 8px 8px 0; /* Some gutter */
@@ -17,6 +16,33 @@
   color: black;
 }
 
+.itemShow{
+  border: solid 3px red;
+  width: 100%;
+}
+
+.contentShow{
+  display: block;
+  opacity: 1;
+  transition: all 2s;
+}
+
+.itemHidden{
+  border: none;
+  width: auto;
+}
+
+.contentHidden{
+  display: none;
+  opacity: 0;
+}
+
+.arrowImg {
+  width: 30px; 
+  height: 17.5px; 
+  margin-left: 20px;
+}
+/*
 .item:nth-child(4n+1) {
     width: 250px;
   }
@@ -29,3 +55,4 @@
   .item:nth-child(4n+1):nth-child(4n+4) {
     width: 380px;
   }
+  */

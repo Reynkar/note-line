@@ -13,16 +13,21 @@ export class AddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public sendNote(content: string): void{
+  public sendNote(title: string, content: string): void{
     var r = Math.floor(Math.random() * 51) + 204;
     var g = Math.floor(Math.random() * 51) + 204;
     var b = Math.floor(Math.random() * 51) + 204;
     var color = "rgb("+r+", "+g+", "+b+")";
     console.log("rgb("+r+", "+g+", "+b+")");
 
+    if (content === "")
+    {
+      content = "-";
+    }
+
     let date = new Date();
 
-    this.localstrg.addNote(content, color, date);
+    this.localstrg.addNote(title, content, color, date);
   }
 
 }
