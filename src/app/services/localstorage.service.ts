@@ -99,22 +99,12 @@ export class LocalstorageService {
         (db) =>
           new Observable(subscriber => {
             let transaction = db.transaction("notes", "readwrite");
-            let title = "first content init"
+            let title = "third content init"
             let content = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
             let color = "rgb(200, 200, 200)"
-            let date = new Date(2018, 11, 24, 10, 33, 30, 0);
+            let date = new Date(2018, 10, 24, 10, 33, 30, 0);
             transaction.objectStore("notes").add({ title: title, content: content, color: color, date: date });
-            title = "second content init"
-            content = "-"
-            color = "rgb(200, 200, 200)"
-            date = new Date(2021, 2, 3, 11, 0, 0, 0);
-            transaction.objectStore("notes").add({ title: title, content: content, color: color, date: date });
-            title = "second content init"
-            content = "-"
-            color = "rgb(200, 200, 200)"
-            date = new Date(2018, 11, 3, 11, 0, 0, 0);
-            transaction.objectStore("notes").add({ title: title, content: content, color: color, date: date });
-
+            
 
             transaction.oncomplete = () => {
               transaction = null;

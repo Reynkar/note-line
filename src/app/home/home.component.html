@@ -1,12 +1,14 @@
 <div class="masonry-wrapper" *ngIf="(localstrg.notes$ | async)?.length > 0; else empty">
-    <div *ngFor="let item of this._notes$ | async | keyvalue">
-        <label (click)="toggleMonth(item.key)" style="color: white; font-size: 2rem"><b>{{ item.key | monthstr }}</b></label>
-        <img src="/assets/up.png" class="arrowImg" id="up {{ item.key }}" style="display: none;"/>
-        <img src="/assets/down.png" class="arrowImg" id="down {{ item.key }}"/>
+    <div *ngFor="let item of this._notes$ | async | keyvalue: keyDescOrder; index as j">
+        <div (click)="toggleMonth(item.key)">
+            <label style="color: white; font-size: 2rem"><b>{{ item.key | monthstr }}</b></label>
+            <img src="/assets/up.png" class="arrowImg" id="up {{ item.key }}" [ngStyle]="{'display' : j > 1 ? 'inline' : 'none'}"/>
+            <img src="/assets/down.png" class="arrowImg" id="down {{ item.key }}" [ngStyle]="{'display' : j > 1 ? 'none' : 'inline'}"/>
+        </div>
         <hr style="width: 80%;">
-        <div class="masonry"  id="{{ item.key }}" >     
+        <div class="masonry"  id="{{ item.key }}" [ngStyle]="{'display' : j > 1 ? 'none' : 'flex'}">     
         <div class="item itemHidden" *ngFor="let note of item.value; index as i" [ngStyle]="{'background-color': note.color}" id="container {{ note.date }}" (click)="toggleItem(note.date)">
-            <label style="font-size: 1.25rem">{{ note.title }}</label>
+            <label style="font-size: 1.4rem">{{ note.title }}</label>
             <br/>
             <div class="contentHidden" id="{{ note.date }}">
                 <br/>

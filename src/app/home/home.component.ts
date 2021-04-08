@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalstorageService } from '../services/localstorage.service';
 import { map, shareReplay, groupBy, mergeMap, toArray, reduce } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
+import { KeyValue } from '@angular/common';
 
 interface Note {
   content: string;
@@ -53,6 +54,10 @@ export class HomeComponent implements OnInit {
       
   }
 
+  private keyDescOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+    return a.key > b.key ? -1 : (b.key > a.key ? 1 : 0);
+  }
+
   ngOnInit(): void {
 
     this._notes$ = this.localstrg.notes$
@@ -64,6 +69,12 @@ export class HomeComponent implements OnInit {
           return r;
       }, Object.create(null)))
     );
+
+    console.log(this._notes$);
+
+    this._notes$.forEach(element => {
+      console.log(element);
+    });
          
   }
 }
