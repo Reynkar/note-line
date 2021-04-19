@@ -1,3 +1,7 @@
+.masonry-wrapper {
+  z-index: 1;
+}
+
 .masonry { /* Masonry container */
     display: flex;
     flex-flow: row wrap;
@@ -9,6 +13,10 @@
   
 .item { /* Masonry bricks or child elements */
   flex: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-width: 150px;
   margin: 0 8px 8px 0; /* Some gutter */
   padding: 30px;
@@ -16,43 +24,50 @@
   color: black;
 }
 
-.itemShow{
-  border: solid 3px red;
-  width: 100%;
-}
-
-.contentShow{
-  display: block;
-  opacity: 1;
-  transition: all 2s;
-}
-
-.itemHidden{
-  border: none;
-  width: auto;
-}
-
-.contentHidden{
-  display: none;
-  opacity: 0;
-}
-
 .arrowImg {
   width: 30px; 
   height: 17.5px; 
   margin-left: 20px;
 }
-/*
+
+#selectedItemBG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0.8;
+  display: none;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+}
+
+#selectedItem{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 30px;
+  border-radius: 50px;
+  background-color: aqua;
+  z-index: 3;
+  width: 60%;
+  color: black;
+}
+
 .item:nth-child(4n+1) {
-    width: 250px;
-  }
-  .item:nth-child(4n+1):nth-child(4n+2) {
-    width: 325px;
-  }
-  .item:nth-child(4n+1):nth-child(4n+3) {
-    width: 180px;
-  }
-  .item:nth-child(4n+1):nth-child(4n+4) {
-    width: 380px;
-  }
-  */
+  width: 250px;
+}
+.item:nth-child(4n+1):nth-child(4n+2) {
+  width: 325px;
+}
+.item:nth-child(4n+1):nth-child(4n+3) {
+  width: 180px;
+}
+.item:nth-child(4n+1):nth-child(4n+4) {
+  width: 380px;
+}
+
+img {
+  cursor: pointer;
+}

@@ -33,6 +33,6 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void{
       this.localstrg.init();
       this.localstrg.updatingNotes();
-      //this.localstrg.addInit();
+      this.localstrg.addInit();
   }
 }

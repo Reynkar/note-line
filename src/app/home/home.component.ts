@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(public localstrg: LocalstorageService) { }
 
   public _notes$: Observable<Note[]>;
+  public selectedItemDate: Date;
 
   public toggleMonth(element): void {
     if (document.getElementById(element).style.display === "none"){
@@ -37,21 +38,37 @@ export class HomeComponent implements OnInit {
       
   }
 
-  public toggleItem(element): void {
-    if (document.getElementById("container " + element).classList.contains("itemHidden")) {
-      document.getElementById(element).classList.remove("contentHidden");
-      document.getElementById(element).classList.add("contentShow");
-      document.getElementById("container " + element).classList.remove("itemHidden");
-      document.getElementById("container " + element).classList.add("itemShow");
-    }
-      
-    else {
-     document.getElementById(element).classList.add("contentHidden");
-     document.getElementById(element).classList.remove("contentShow");
-     document.getElementById("container " + element).classList.add("itemHidden");
-     document.getElementById("container " + element).classList.remove("itemShow");
-    }
-      
+  public toggleItem(title, content, date, color): void {
+    document.getElementById("selectedItemBG").style.display = "block";
+
+    this.selectedItemDate = date;
+
+    document.getElementById("title").innerText = title;
+    document.getElementById("content").innerText = content;
+    document.getElementById("date").innerText = date;
+    
+    let box = document.getElementById("selectedItem");
+    
+    box.style.display = "block";
+    box.style.backgroundColor = color;
+    
+    let width = box.clientWidth;
+    let height = box.clientHeight;
+
+    console.log(width + " " + height);
+    box.style.marginLeft = "-" + width/2 + "px";
+    box.style.marginTop = "-" + height/2 + "px";
+    
+  }
+
+  public toggleBG(): void {
+    document.getElementById("selectedItemBG").style.display = "none";
+    document.getElementById("selectedItem").style.display = "none";
+  }
+
+  public removeNote(): void {
+    this.toggleBG();
+    this.localstrg.removeNote(this.selectedItemDate);
   }
 
   private keyDescOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {

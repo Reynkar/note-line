@@ -7,15 +7,9 @@
         </div>
         <hr style="width: 80%;">
         <div class="masonry"  id="{{ item.key }}" [ngStyle]="{'display' : j > 1 ? 'none' : 'flex'}">     
-        <div class="item itemHidden" *ngFor="let note of item.value; index as i" [ngStyle]="{'background-color': note.color}" id="container {{ note.date }}" (click)="toggleItem(note.date)">
+        <div class="item" *ngFor="let note of item.value; index as i" [ngStyle]="{'background-color': note.color}" id="container {{ note.date }}" (click)="toggleItem(note.title, note.content, note.date, note.color)">
             <label style="font-size: 1.4rem">{{ note.title }}</label>
             <br/>
-            <div class="contentHidden" id="{{ note.date }}">
-                <br/>
-                <label>{{ note.content }}</label>
-                <br/>
-                <br/>
-            </div>
             <label style="color: grey; font-size: 0.75em;">{{ note.date | date:'MMM d, y, h:mm:ss a' }}</label>
         </div>     
     </div>
@@ -23,3 +17,18 @@
 </div>
 
 <ng-template #empty>The list is empty...</ng-template>
+
+<div id="selectedItemBG" (click)="toggleBG()">
+    &nbsp;
+</div>
+
+<div id="selectedItem">
+    <h1><strong id="title"></strong></h1>
+    <br/>
+    <p id="content"></p>
+    <br/>
+    <p style="color: grey; font-size: 0.75em;" id="date"></p>
+    <br/>
+    <img src="/assets/save.png" style="width: 50px; height: 50px; margin-right: 50px;"/>
+    <img src="/assets/trash.png" style="width: 50px; height: 50px;" (click)="removeNote()"/>
+</div>
