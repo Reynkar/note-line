@@ -120,6 +120,37 @@ export class LocalstorageService {
        });
  }
 
+ public updateNote(title: string, content: string, color: string, date: Date): void{
+
+  this.db$.pipe(
+    switchMap(
+      (db) =>
+        new Observable(subscriber => {
+          let transaction = db.transaction("notes", "readwrite");
+          transaction.objectStore("notes").put({ title: title, content: content, color: color, date: date });
+          
+
+          transaction.oncomplete = () => {
+            transaction = null;
+            this.update$.next();
+            subscriber.complete();
+          };
+
+          transaction.onerror = (error) => {
+            transaction = null;
+            subscriber.error(error);
+            alert("An error has occured, check the console for more detail!");
+          };
+
+          return () => transaction?.abort();
+        })
+    )
+  ).subscribe({
+      error: (error) =>
+        console.log("An error has occured during updateing a note: ", error),
+  });
+}
+
   public addInit(): void{
 
     this.db$.pipe(

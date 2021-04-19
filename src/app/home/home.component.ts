@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
 
   public _notes$: Observable<Note[]>;
   public selectedItemDate: Date;
+  public selectedItemColor: string;
 
   public toggleMonth(element): void {
     if (document.getElementById(element).style.display === "none"){
@@ -42,9 +43,10 @@ export class HomeComponent implements OnInit {
     document.getElementById("selectedItemBG").style.display = "block";
 
     this.selectedItemDate = date;
+    this.selectedItemColor = color;
 
-    document.getElementById("title").innerText = title;
-    document.getElementById("content").innerText = content;
+    (<HTMLInputElement>document.getElementById("title")).value = title;
+    (<HTMLInputElement>document.getElementById("content")).value = content;
     document.getElementById("date").innerText = date;
     
     let box = document.getElementById("selectedItem");
@@ -64,6 +66,15 @@ export class HomeComponent implements OnInit {
   public toggleBG(): void {
     document.getElementById("selectedItemBG").style.display = "none";
     document.getElementById("selectedItem").style.display = "none";
+  }
+
+  public saveNote(title: string, content: string): void{
+    console.log("saved data:");
+    console.log("title: " + title);
+    console.log("content: " + content);
+    console.log("color: " + this.selectedItemColor);
+    console.log("date: " + this.selectedItemDate);
+    this.localstrg.updateNote(title, content, this.selectedItemColor, this.selectedItemDate);
   }
 
   public removeNote(): void {
